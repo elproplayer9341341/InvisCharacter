@@ -1,0 +1,80 @@
+-- InvisCharacter v1.0.0 - Roblox Animation Vulnerability Exploit
+-- Created on 2024
+
+print("InvisCharacter v1.0.0 Executed · by "..game:GetService("Players").LocalPlayer.Name.. " · Time : "..os.date())
+
+local function activateMoving(gui)
+	gui.Active = true
+	gui.Archivable = true
+	gui.Draggable = true
+end
+
+wait()
+
+local InvisCharacterGui_FE = Instance.new("ScreenGui")
+local MoveFrame = Instance.new("Frame")
+local MoveText = Instance.new("TextLabel")
+local Activate = Instance.new("TextButton")
+
+InvisCharacterGui_FE.Name = "InvisCharacterGui_FE"
+InvisCharacterGui_FE.Parent = game.CoreGui
+InvisCharacterGui_FE.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MoveFrame.Name = "MoveFrame"
+MoveFrame.Parent = InvisCharacterGui_FE
+MoveFrame.BackgroundColor3 = Color3.fromRGB(255, 213, 114)
+MoveFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MoveFrame.BorderSizePixel = 0
+MoveFrame.Position = UDim2.new(0.0823970065, 0, 0.565040648, 0)
+MoveFrame.Size = UDim2.new(0, 70, 0, 25)
+
+MoveText.Name = "MoveText"
+MoveText.Parent = MoveFrame
+MoveText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MoveText.BackgroundTransparency = 1.000
+MoveText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MoveText.BorderSizePixel = 0
+MoveText.Size = UDim2.new(0, 70, 0, 25)
+MoveText.Font = Enum.Font.SourceSans
+MoveText.Text = "Move here"
+MoveText.TextColor3 = Color3.fromRGB(0, 0, 0)
+MoveText.TextSize = 14.000
+MoveText.TextWrapped = true
+
+Activate.Name = "Activate"
+Activate.Parent = MoveFrame
+Activate.BackgroundColor3 = Color3.fromRGB(114, 255, 119)
+Activate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Activate.BorderSizePixel = 0
+Activate.Position = UDim2.new(-0.949922621, 0, 0.00707275374, 0)
+Activate.Size = UDim2.new(0, 61, 0, 24)
+Activate.Font = Enum.Font.SourceSans
+Activate.Text = "Invisible"
+Activate.TextColor3 = Color3.fromRGB(0, 0, 0)
+Activate.TextSize = 14.000
+
+activateMoving(MoveFrame)
+
+local toggle = false
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://116087246623864"
+
+local animTrack = humanoid:LoadAnimation(animation)
+
+Activate.MouseButton1Click:Connect(function()
+	if not toggle then
+		toggle = true
+		Activate.Text = "UnInvisible"
+		animTrack:Play()
+	else
+	if toggle then
+		Activate.Text = "Invisible"
+		toggle = false
+		animTrack:Stop()
+		end
+	end
+	end)
